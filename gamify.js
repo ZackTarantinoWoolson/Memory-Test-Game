@@ -18,7 +18,7 @@ function getRandom() {
 
 function setMasterSeqFirstNum() {
     globalThis.mastSequence = getRandom().toString();
-    console.log("mastSequence ", mastSequence)
+    // console.log("mastSequence ", mastSequence)
     showSequence();
 }
 
@@ -26,65 +26,33 @@ function setNextNum() {
     nextNum = getRandom().toString();
     current = mastSequence
     globalThis.mastSequence = current + nextNum;
-    console.log("mastSequence", mastSequence)
+    // console.log("mastSequence", mastSequence)
     showSequence();
 }
 
-function showSequence() {
-    // document.getElementById("myH1").style.color = "red";
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+async function showSequence() {
     seq = mastSequence.split("");
 
     for (let i = 0; i < seq.length; i++) {
+        // console.log(seq[i])
+        await delay(500);
+        document.getElementById(seq[i]).style.backgroundColor = "red"
+        await delay(500);
+        document.getElementById(seq[i]).style.backgroundColor = ""
         
-    }
-
-    
+    }   
 }
-
-// sequence = {
-
-//     check: function (e) {
-//         console.log(mastSequence)
-
-//         sequence.value += this.id;
-//         console.log(sequence.value)
-
-//         if (sequence.value == mastSequence) {
-//             alert("You did it!");
-//             sequence.value = "";
-//         }
-//         else {
-//             if (sequence.value.length == mastSequence.length) {
-//                 console.log(sequence.value.length)
-//                 console.log(mastSequence.length)
-
-//                 if (sequence.value != mastSequence) {
-//                     console.log(sequence.value)
-//                     console.log(mastSequence)
-
-//                     alert("Try again")
-//                     sequence.value = "";
-//                 }
-//             }
-//         }
-//     },
-//     setSequence: function (e) {
-
-//     },
-
-//     value: ""
-
-// }
-
 
 sequence = {
 
     check: function (e) {
         sequence.value += this.id;
-        console.log("Seq Value", sequence.value)
+        // console.log("Seq Value", sequence.value)
 
         if (sequence.value == mastSequence) {
-            console.log("correct")
+            // console.log("correct")
             setNextNum();
             sequence.value = "";
         }
